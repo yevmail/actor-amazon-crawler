@@ -8,6 +8,7 @@ async function parseItemDetail($, request, requestQueue, getReviews) {
     const reviewsConunt = $('#acrCustomerReviewText').length !== 0 ? $('#acrCustomerReviewText').eq(0).text() : null;
     const stars = $('.reviewCountTextLinkedHistogram').length !== 0 ? $('.reviewCountTextLinkedHistogram').attr('title').match(/(\d+\.\d+)|\d+/)[0] : null;
     const details = {};
+    const specs = [];
     const breadCrumbs = $('#wayfinding-breadcrumbs_feature_div').text().trim().split('\n')
         .filter(el => el.trim() != '')
         .map(el => el.trim()).join('')
@@ -28,10 +29,18 @@ async function parseItemDetail($, request, requestQueue, getReviews) {
             }
         });
     }
+    if ($('#feature-bullets > ul').length !== 0) {
+        $('#feature-bullets > ul > li').each(function () {
+            if ($(this).find('.a-list-item')) {
+                specs.push($(this).find('.a-list-item').text().trim());
+            }
+        });
+    }
+
     // if (getReviews) {
     //     item.reviews = await parseItemReviews($, request, requestQueue);
     // }
-    item.specs01 = 'test specs01';
+    item.specs = specs;
     item.InStock = $('#availability') ? true: false;
     item.delivery = $('#delivery-message').text().trim();
     item.featureDesc = $('#featurebullets_feature_div').length !== 0 ? $('#featurebullets_feature_div').text().trim() : null;
