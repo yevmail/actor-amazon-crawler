@@ -31,6 +31,7 @@ async function parseItemDetail($, request, requestQueue, getReviews) {
     // if (getReviews) {
     //     item.reviews = await parseItemReviews($, request, requestQueue);
     // }
+    item.specs01 = 'test specs01';
     item.InStock = $('#availability') ? true: false;
     item.delivery = $('#delivery-message').text().trim();
     item.featureDesc = $('#featurebullets_feature_div').length !== 0 ? $('#featurebullets_feature_div').text().trim() : null;
